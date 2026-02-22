@@ -4,60 +4,57 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SmartK TV</title>
+
 <link rel="stylesheet" href="style.css">
+
+<!-- Firebase SDK -->
+<script type="module" src="firebase.js"></script>
+<script type="module" src="upload.js"></script>
+
 </head>
+
 <body>
 
-<!-- 3D Logo -->
-<canvas id="logoCanvas"></canvas>
+<header>
+    <h1 class="logo3d">SmartK TV</h1>
+    <p>Created by Akin S. Sokpah</p>
 
-<h1>SmartK TV</h1>
-<p>Created by Akin S. Sokpah</p>
+    <input id="search" placeholder="Search...">
 
-<!-- Search -->
-<input id="search" placeholder="Search..." onkeyup="searchVideos()">
+    <button id="themeBtn">🌙 Toggle Theme</button>
 
-<!-- Theme Toggle -->
-<button onclick="toggleTheme()">🌙 Toggle Theme</button>
+    <div class="filters">
+        <button onclick="filter('all')">All</button>
+        <button onclick="filter('movies')">Movies</button>
+        <button onclick="filter('music')">Music</button>
+        <button onclick="filter('news')">News</button>
+        <button onclick="filter('history')">History</button>
+    </div>
+</header>
 
-<!-- Category Filters -->
-<div class="buttons">
-  <button onclick="filterCategory('All')">All</button>
-  <button onclick="filterCategory('Movies')">Movies</button>
-  <button onclick="filterCategory('Music')">Music</button>
-  <button onclick="filterCategory('Instrumental')">Instrumental</button>
-  <button onclick="filterCategory('News')">News</button>
-  <button onclick="filterCategory('History')">History</button>
-</div>
+<hr>
 
-<!-- Upload form is added dynamically by upload.js -->
+<section class="uploadBox">
+    <h2>Upload Content</h2>
 
-<!-- Trending Slider -->
-<div id="trendingSlider"></div>
+    <input id="title" placeholder="Title">
+    
+    <select id="category">
+        <option value="movies">Movies</option>
+        <option value="music">Music</option>
+        <option value="news">News</option>
+        <option value="history">History</option>
+    </select>
 
-<!-- Video Grid -->
-<div id="videoGrid"></div>
+    <input type="file" id="file">
+    <button id="uploadBtn">Upload</button>
+</section>
 
-<!-- Player Overlay -->
-<div id="playerOverlay">
-  <div class="playerBox">
-      <button onclick="closePlayer()">Close</button>
-      <iframe id="playerFrame" allowfullscreen></iframe>
-  </div>
-</div>
+<hr>
 
-<!-- Back To Top -->
-<button id="topBtn" onclick="scrollToTop()">⬆</button>
+<section id="contentGrid"></section>
 
-<!-- Scripts -->
-<script type="module" src="firebase.js"></script>
-<script src="logo.js"></script>
-<script src="storage.js"></script>
-<script type="module" src="upload.js"></script>
-<script type="module" src="slider.js"></script>
-<script src="player.js"></script>
-<script src="script.js"></script>
-<script src="theme.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
