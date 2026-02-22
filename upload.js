@@ -1,44 +1,38 @@
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-storage.js";
-import { getDatabase, ref as dbRef, push, onValue } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-database.js";
-import { storage, database } from "./firebase.js";
+import { storage, db } from "./firebase.js";
 
-const uploadContainer = document.createElement("div");
-uploadContainer.innerHTML = `
-  <h3>Upload Your Content</h3>
-  <input type="file" id="fileInput"><br><br>
-  <input type="text" id="fileTitle" placeholder="Title"><br><br>
-  <select id="fileCategory">
-    <option value="Movies">Movies</option>
-    <option value="Music">Music</option>
-    <option value="Instrumental">Instrumental</option>
-    <option value="News">News</option>
-    <option value="History">History</option>
-  </select><br><br>
-  <button id="uploadBtn">Upload</button>
-  <p id="uploadStatus"></p>
-`;
-document.body.insertBefore(uploadContainer, document.getElementById("videoGrid"));
+import {
+ref,
+uploadBytes,
+getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-document.getElementById("uploadBtn").addEventListener("click", async ()=>{
-  const file = document.getElementById("fileInput").files[0];
-  const title = document.getElementById("fileTitle").value.trim();
-  const category = document.getElementById("fileCategory").value;
-  const status = document.getElementById("uploadStatus");
+import {
+ref as dbRef,
+push
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-  if(!file || !title){ alert("Select file & title"); return; }
+const btn=document.getElementById("uploadBtn");
 
-  const fileRef = ref(storage, `uploads/${file.name}`);
-  status.textContent="Uploading...";
+btn.onclick = async ()=>{
 
-  try{
-    await uploadBytes(fileRef, file);
-    const url = await getDownloadURL(fileRef);
-    await push(dbRef(database,"uploads"),{title,category,url});
-    status.textContent="Upload successful!";
-    document.getElementById("fileInput").value="";
-    document.getElementById("fileTitle").value="";
-  }catch(e){
-    console.error(e);
-    status.textContent="Upload failed!";
-  }
+const file=document.getElementById("file").files[0];
+const title=document.getElementById("title").value;
+const category=document.getElementById("category").value;
+
+if(!file) return alert("Select file");
+
+const storageRef = ref(storage,"uploads/"+file.name);
+
+await uploadBytes(storageRef,file);
+
+const url = await getDownloadURL(storageRef);
+
+await push(dbRef(db,"content"),{
+title,
+category,
+url
 });
+
+alert("Uploaded!");
+location.reload();
+}
