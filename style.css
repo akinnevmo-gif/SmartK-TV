@@ -1,12 +1,8 @@
-/* ===== SmartK TV Styling ===== */
-
 body{
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
     text-align:center;
     color:white;
-
-    /* RED - BLUE - PURPLE - YELLOW theme */
     background:linear-gradient(45deg, red, blue, purple, yellow);
     background-size:400% 400%;
     animation:bgMove 12s infinite alternate;
@@ -17,98 +13,32 @@ body{
     to{background-position:100% 50%;}
 }
 
-/* Logo Canvas */
-#logoCanvas{
-    width:100%;
-    height:120px;
-}
+#logoCanvas{ width:100%; height:120px; }
 
-/* Search */
-#search{
-    padding:10px;
-    width:60%;
-    max-width:400px;
-    border-radius:8px;
-    border:none;
-    margin:10px;
-}
+#search{ padding:10px; width:60%; max-width:400px; border-radius:8px; border:none; margin:10px; }
 
-/* Buttons */
-.buttons{
-    margin:10px;
-}
+.buttons{ margin:10px; }
+button{ padding:8px 14px; margin:5px; border:none; border-radius:8px; cursor:pointer; font-weight:bold; }
+button:hover{ transform:scale(1.1); }
 
-button{
-    padding:8px 14px;
-    margin:5px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-}
+#videoGrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px; padding:20px; }
+.card{ background:#111; border-radius:10px; padding:10px; cursor:pointer; transition:0.3s; }
+.card:hover{ transform:scale(1.05); }
+.card img{ width:100%; border-radius:6px; }
+.title{ margin-top:8px; }
 
-button:hover{
-    transform:scale(1.1);
-}
+#playerOverlay{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; }
+.playerBox{ background:black; padding:20px; border-radius:12px; }
+#playerFrame{ width:80vw; height:45vw; max-width:900px; }
 
-/* Video Grid */
-#videoGrid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-    gap:15px;
-    padding:20px;
-}
+#topBtn{ display:none; position:fixed; bottom:20px; right:20px; }
 
-.card{
-    background:#111;
-    border-radius:10px;
-    padding:10px;
-    cursor:pointer;
-    transition:0.3s;
-}
+/* Dark Mode */
+.dark{ background:#111; color:white; }
+.dark .card{ background:#222; }
+.dark button{ background:#333; color:white; }
 
-.card:hover{
-    transform:scale(1.05);
-}
-
-.card img{
-    width:100%;
-    border-radius:6px;
-}
-
-.title{
-    margin-top:8px;
-}
-
-/* Player Overlay */
-#playerOverlay{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.9);
-    justify-content:center;
-    align-items:center;
-}
-
-.playerBox{
-    background:black;
-    padding:20px;
-    border-radius:12px;
-}
-
-#playerFrame{
-    width:80vw;
-    height:45vw;
-    max-width:900px;
-}
-
-/* Back To Top */
-#topBtn{
-    display:none;
-    position:fixed;
-    bottom:20px;
-    right:20px;
-}
+/* Trending Slider */
+#trendingSlider{ display:flex; overflow-x:auto; gap:10px; padding:15px; background:#222; }
+#trendingSlider::-webkit-scrollbar{ height:8px; }
+#trendingSlider::-webkit-scrollbar-thumb{ background:yellow; border-radius:4px; }
